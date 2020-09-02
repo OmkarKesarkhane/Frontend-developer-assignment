@@ -4,7 +4,7 @@ As part of our application process, we'd like to see what you can produce by giv
 
 ## Problem Statement
 
-We would like you to create a Distributor Management Progressive Web Application (PWA). Let’s say it is used for distributing API keys for a software.  The features it should include:
+We would like you to create a Distributor Management Progressive Web Application (PWA). A distributor is a person who purchases API keys. These API keys are used to activate the software. The PWA you'll build will be used for distributing API keys. The features it should include:
 
 - Create a new order. Order may contain information about Order Id, the number of API keys required, the details of the Distributor like name, address, PAN card number, etc. (Form Validation is a plus)
 - Add notes to the order, including possibly how to pay it, where to send checks, etc. 
