@@ -1,0 +1,45 @@
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+
+  .mainHead {
+    font-size: 24px;
+    line-height: 24 * 1.4px;
+    padding: 0;
+    margin: 10px 0;
+    text-align: left;
+  }
+}
+
+.btn {
+  width: auto;
+  padding: 10px 10px;
+  font-size: 16px;
+  border-radius: 0px;
+  background-color: rgb(150, 41, 251);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgb(134, 134, 134);
+}
+
+table,
+tr,
+td {
+  border-collapse: collapse;
+  border: 1px solid gray;
+}
+
+td {
+  padding: 15px 50px;
+}
+
+.table {
+  margin: 0 auto;
+  font-size: 18px;
+  width: 100%;
+}
+
+.tableHead {
+  background-color: rgb(200, 215, 255);
+}
