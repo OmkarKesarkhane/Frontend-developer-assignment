@@ -1,68 +1,26 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Frontend Developer Assignment
 
-## Available Scripts
+As part of our application process, we'd like to see what you can produce by giving you a small assignment. It should take you no more than a few hours to complete the assignment, but any extra polish or features you might want to put in will not go unnoticed.
 
-In the project directory, you can run:
+## Problem Statement
 
-### `yarn start`
+We would like you to create a Distributor Management Progressive Web Application (PWA). A distributor is a person who purchases API keys. These API keys are used to activate the software. The PWA you'll build will be used for distributing API keys. The features it should include:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Create a new order. Order may contain information about Order Id, the number of API keys required, the details of the Distributor like name, address, PAN card number, etc. (Form Validation is a plus)
+- Add notes to the order, including possibly how to pay it, where to send checks, etc.
+- Send the API keys via email (does not have to actually send emails, but if it does, great!)
+- View previous orders. Dara should be searchable with order Id or date of purchase.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Your backend can be anything, and does not have to work. Even static data in code is ok.
 
-### `yarn test`
+You can use any framework you like, but React will be favourable, as our current product is built using that.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Requirements -
 
-### `yarn build`
+- Code should have highly reusable components
+- Web Page should be responsive for different devices
+- Should work perfectly in Chrome, Firefox, Microsoft Edge.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Take your time but try to deliver it within 1 week. If you have any questions, please ask!
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+To complete your homework, please fork this repo and commit your work to your fork. When you are ready for us to look at it, give us access to your fork (OzoneX, tHeMaskedMan981) so we can review and run it(Add instructions in the README). You can also mail us with the link of github repository. Also, if possible, deploy it to any online platform (eg. Netlify) and share it’s link in the README of your fork.
