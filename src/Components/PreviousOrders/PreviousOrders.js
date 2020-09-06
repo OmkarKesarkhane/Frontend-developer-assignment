@@ -9,6 +9,8 @@ function PreviousOrders() {
   const { state, dispatch } = useContext(OrderContext);
   let { query, selected, orders } = state;
 
+  let totalOrder = JSON.parse(localStorage.getItem("Orders"));
+
   const history = useHistory();
 
   //Route to order Page
@@ -17,9 +19,10 @@ function PreviousOrders() {
   };
 
   //Get data from local storage & if query filter accordingly
-  let totalOrder = JSON.parse(localStorage.getItem("Orders"));
 
   useEffect(() => {
+    let totalOrder = JSON.parse(localStorage.getItem("Orders"));
+
     if (totalOrder !== null) {
       let filteredOrders = totalOrder.filter((el) => {
         if (query === undefined || query === null) {
@@ -34,7 +37,7 @@ function PreviousOrders() {
         payload: filteredOrders,
       });
     }
-  }, [query, dispatch, selected, totalOrder]);
+  }, [dispatch, query, selected]);
 
   return (
     <div className={styles.container}>
@@ -75,7 +78,7 @@ function PreviousOrders() {
         </div>
       ) : (
         <div className={styles.tableContainer}>
-          You don't have any ApiKeys. Please Generate Api Keys
+          Sorry, You don't have ApiKeys. Please generate ApiKeys
         </div>
       )}
     </div>

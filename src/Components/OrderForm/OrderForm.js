@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 } from "uuid";
 import styles from "./OrderForm.module.scss";
 import moment from "moment";
@@ -9,6 +9,7 @@ function OrderForm({ getData }) {
   const [email, setEmail] = useState();
   const [address, setAddress] = useState();
   const [panCard, setPanCard] = useState();
+  const [valid, setValid] = useState(false);
 
   // reset form after submit
   const resetForm = () => {
@@ -19,9 +20,37 @@ function OrderForm({ getData }) {
     setPanCard("");
   };
 
+  useEffect(() => {
+    if (
+      name !== undefined &&
+      numofApis !== undefined &&
+      email !== undefined &&
+      address !== undefined &&
+      panCard !== undefined
+    ) {
+      if (name.length > 20) {
+        console.log(name);
+        setValid(false);
+      } else if (!email.includes("@") || email.length < 5) {
+        console.log(email);
+        setValid(false);
+      } else if (address.length < 1) {
+        console.log(address);
+        setValid(false);
+      } else if (panCard.length !== 10) {
+        console.log(panCard);
+        setValid(false);
+      } else {
+        console.log("valid");
+        setValid(true);
+      }
+    }
+  }, [name, numofApis, email, address, panCard]);
+
   //order form submission & data is stored in local Storage
   //uuid is used for apiKey & id & moment for date formating
   const handleSubmit = (e) => {
+    console.log("hello");
     e.preventDefault();
     let newOrder = () => {
       return {
@@ -42,7 +71,6 @@ function OrderForm({ getData }) {
         localStorage.setItem("Orders", JSON.stringify([...orders, newOrder()]));
       }
     }
-
     resetForm();
   };
 
@@ -59,7 +87,7 @@ function OrderForm({ getData }) {
           ></input>
         </div>
         <div className={styles.formGroup}>
-          <label>Email</label>
+          <label>Email (*Must include "@")</label>
           <input
             type="text"
             value={email}
@@ -83,7 +111,7 @@ function OrderForm({ getData }) {
           ></input>
         </div>
         <div className={styles.formGroup}>
-          <label>PAN card number</label>
+          <label>PAN card number (*Must be of 10 Characters)</label>
           <input
             type="text"
             value={panCard}
@@ -96,7 +124,16 @@ function OrderForm({ getData }) {
           <p className={styles.method}> Apple Pay.</p>
           <p className={styles.method}> Accept Checks</p>
         </div>
-        <button type="submit" className={styles.btn}>
+        <button
+          type="submit"
+          style={
+            valid
+              ? { backgroundColor: "#9246f6" }
+              : { backgroundColor: "#d0a4fc" }
+          }
+          className={styles.btn}
+          disabled={!valid}
+        >
           Submit
         </button>
       </form>
