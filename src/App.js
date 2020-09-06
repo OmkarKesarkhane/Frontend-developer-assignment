@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import "./App.css";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import OrderForm from "./Components/OrderForm/OrderForm";
 import PreviousOrders from "./Components/PreviousOrders/PreviousOrders";
 import { OrderContext } from "./Context/Context";
@@ -18,12 +18,12 @@ function App() {
   return (
     <div className="App">
       <OrderContext.Provider value={{ state, dispatch }}>
-        <BrowserRouter>
+        <HashRouter>
           <Switch>
             <Route exact path="/" component={PreviousOrders}></Route>
             <Route exact path="/create-order" component={OrderForm}></Route>
           </Switch>
-        </BrowserRouter>
+        </HashRouter>
       </OrderContext.Provider>
     </div>
   );
