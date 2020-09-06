@@ -17,14 +17,14 @@ function App() {
   const [state, dispatch] = useReducer(Reducer, initialState);
   return (
     <div className="App">
-      <OrderContext.Provider value={{ state, dispatch }}>
-        <HashRouter>
+      <HashRouter>
+        <OrderContext.Provider value={{ state, dispatch }}>
           <Switch>
             <Route exact path="/" component={PreviousOrders}></Route>
             <Route exact path="/create-order" component={OrderForm}></Route>
           </Switch>
-        </HashRouter>
-      </OrderContext.Provider>
+        </OrderContext.Provider>
+      </HashRouter>
     </div>
   );
 }

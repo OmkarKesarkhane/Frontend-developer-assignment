@@ -17,22 +17,24 @@ function PreviousOrders() {
   };
 
   //Get data from local storage & if query filter accordingly
+  let totalOrder = JSON.parse(localStorage.getItem("Orders"));
+
   useEffect(() => {
-    let totalOrder = JSON.parse(localStorage.getItem("Orders"));
+    if (totalOrder !== null) {
+      let filteredOrders = totalOrder.filter((el) => {
+        if (query === undefined || query === null) {
+          return el;
+        } else {
+          return el[selected].includes(query) ? el : false;
+        }
+      });
 
-    let filteredOrders = totalOrder.filter((el) => {
-      if (query === undefined || query === null) {
-        return el;
-      } else {
-        return el[selected].includes(query) ? el : false;
-      }
-    });
-
-    dispatch({
-      type: TOTAL_ORDERS,
-      payload: filteredOrders,
-    });
-  }, [query, dispatch, selected]);
+      dispatch({
+        type: TOTAL_ORDERS,
+        payload: filteredOrders,
+      });
+    }
+  }, [query, dispatch, selected, totalOrder]);
 
   return (
     <div className={styles.container}>
@@ -46,30 +48,36 @@ function PreviousOrders() {
           </button>
         </div>
       </div>
-      <div className={styles.tableContainer}>
-        {orders !== undefined && orders !== null ? (
-          <table className={styles.table}>
-            <thead className={styles.tableHead}>
-              <tr>
-                <td>Sr.no</td>
-                <td>Id</td>
-                <td>API Key</td>
-                <td>Date</td>
-              </tr>
-            </thead>
-            <tbody className={styles.tableBody}>
-              {state.orders.map((api, i) => (
-                <tr key={api.id}>
-                  <td>{i + 1}</td>
-                  <td>{api.id}</td>
-                  <td>{api.apiKey}</td>
-                  <td>{api.date}</td>
+      {totalOrder !== null ? (
+        <div className={styles.tableContainer}>
+          {orders !== undefined && orders !== null ? (
+            <table className={styles.table}>
+              <thead className={styles.tableHead}>
+                <tr>
+                  <td>Sr.no</td>
+                  <td>Id</td>
+                  <td>API Key</td>
+                  <td>Date</td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : null}
-      </div>
+              </thead>
+              <tbody className={styles.tableBody}>
+                {state.orders.map((api, i) => (
+                  <tr key={api.id}>
+                    <td>{i + 1}</td>
+                    <td>{api.id}</td>
+                    <td>{api.apiKey}</td>
+                    <td>{api.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : null}
+        </div>
+      ) : (
+        <div className={styles.tableContainer}>
+          You don't have any ApiKeys. Please Generate Api Keys
+        </div>
+      )}
     </div>
   );
 }
