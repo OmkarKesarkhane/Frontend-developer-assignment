@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { v4 } from "uuid";
 import styles from "./OrderForm.module.scss";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 function OrderForm({ getData }) {
   const [numofApis, setNumofApis] = useState(0);
@@ -10,6 +11,8 @@ function OrderForm({ getData }) {
   const [address, setAddress] = useState();
   const [panCard, setPanCard] = useState();
   const [valid, setValid] = useState(false);
+
+  let history = useHistory();
 
   // reset form after submit
   const resetForm = () => {
@@ -72,6 +75,7 @@ function OrderForm({ getData }) {
       }
     }
     resetForm();
+    history.push("/");
   };
 
   return (
@@ -87,7 +91,9 @@ function OrderForm({ getData }) {
           ></input>
         </div>
         <div className={styles.formGroup}>
-          <label>Email (*Must include "@")</label>
+          <label>
+            Email <span>(*Must include "@" ".com")</span>
+          </label>
           <input
             type="text"
             value={email}
@@ -95,15 +101,20 @@ function OrderForm({ getData }) {
           ></input>
         </div>
         <div className={styles.formGroup}>
-          <label>Name</label>
+          <label>
+            Name <span>(*Must contain atleast 2 characters)</span>
+          </label>
           <input
+            required
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
           ></input>
         </div>
         <div className={styles.formGroup}>
-          <label>Address</label>
+          <label>
+            Address <span>(*Must contain atleast 2 characters)</span>
+          </label>
           <input
             type="text"
             value={address}
@@ -111,7 +122,9 @@ function OrderForm({ getData }) {
           ></input>
         </div>
         <div className={styles.formGroup}>
-          <label>PAN card number (*Must be of 10 Characters)</label>
+          <label>
+            PAN card number <span>(*Must be of 10 Characters)</span>
+          </label>
           <input
             type="text"
             value={panCard}
