@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import styles from "./Search.module.scss";
+import { OrderContext } from "../../Context/Context";
+import { SEARCH } from "../../Context/ActionTypes";
 
-function Search({ handleSearch }) {
-  const [query, setQuery] = useState();
+function Search() {
+  const { dispatch } = useContext(OrderContext);
+
   const [selected, setSelected] = useState("id");
 
   const handleSubmit = (e) => {
@@ -11,18 +15,49 @@ function Search({ handleSearch }) {
   const handleSelect = (e) => {
     setSelected(e.target.value);
   };
-  if (query !== null && query !== undefined) {
-    handleSearch(query, selected);
-  }
+
+  const handleQuery = (e) => {
+    let query = e.target.value;
+    let time;
+
+    //Used Debouncing
+
+    if (time > 0) {
+      clearTimeout(time);
+    }
+
+    time = setTimeout(() => {
+      dispatch({
+        type: SEARCH,
+        payload: { query, selected },
+      });
+    }, 2000);
+  };
+
   return (
     <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <select value={selected} onChange={(e) => handleSelect(e)}>
-          <option value="date">Date</option>
-          <option value="id">Order-Id</option>
-        </select>
-        <input value={query} onChange={(e) => setQuery(e.target.value)}></input>
-        <button type="submit">Search</button>
+      <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+        <div className={styles.inputContainer}>
+          <select
+            value={selected}
+            className={styles.select}
+            onChange={(e) => handleSelect(e)}
+          >
+            <option value="date">Date</option>
+            <option value="id">Order-Id</option>
+          </select>
+          <input
+            className={styles.input}
+            id="input"
+            placeholder="Enter value"
+            onChange={(e) => handleQuery(e)}
+          ></input>
+        </div>
+        {/* <div className={styles.btnContainer}>
+          <button className={styles.btn} type="submit">
+            Search
+          </button>
+        </div> */}
       </form>
     </div>
   );

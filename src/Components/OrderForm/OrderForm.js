@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { v4, v3 } from "uuid";
+import React, { useState } from "react";
+import { v4 } from "uuid";
 import styles from "./OrderForm.module.scss";
+import moment from "moment";
 
 function OrderForm({ getData }) {
   const [numofApis, setNumofApis] = useState(0);
@@ -9,6 +10,7 @@ function OrderForm({ getData }) {
   const [address, setAddress] = useState();
   const [panCard, setPanCard] = useState();
 
+  // reset form after submit
   const resetForm = () => {
     setNumofApis(0);
     setName("");
@@ -17,6 +19,8 @@ function OrderForm({ getData }) {
     setPanCard("");
   };
 
+  //order form submission & data is stored in local Storage
+  //uuid is used for apiKey & id & moment for date formating
   const handleSubmit = (e) => {
     e.preventDefault();
     let newOrder = () => {
@@ -26,7 +30,7 @@ function OrderForm({ getData }) {
         email,
         address,
         panCard,
-        date: new Date(),
+        date: moment().format("LL"),
         apiKey: v4(),
       };
     };
@@ -44,7 +48,7 @@ function OrderForm({ getData }) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.paymentDetails}>adsad</div>
+      <p className={styles.main}>Generate Api Key</p>
       <form className={styles.formContainer} onSubmit={(e) => handleSubmit(e)}>
         <div className={styles.formGroup}>
           <label>Number of Api Keys</label>
@@ -85,6 +89,12 @@ function OrderForm({ getData }) {
             value={panCard}
             onChange={(e) => setPanCard(e.target.value)}
           ></input>
+        </div>
+        <div className={styles.paymentDetails}>
+          <p className={styles.payment}>Payment Methods</p>
+          <p className={styles.method}>Accept credit cards</p>
+          <p className={styles.method}> Apple Pay.</p>
+          <p className={styles.method}> Accept Checks</p>
         </div>
         <button type="submit" className={styles.btn}>
           Submit

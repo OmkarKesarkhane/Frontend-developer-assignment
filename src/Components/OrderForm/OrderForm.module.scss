@@ -1,54 +1,82 @@
+@import "../../SASS/mixins";
 .container {
   max-width: 1440px;
   min-height: fit-content;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   margin: 0 auto;
+
+  .main {
+    font-size: 24px;
+    margin: 0;
+    margin-top: 15px;
+  }
 }
 .paymentDetails {
-  width: 100%;
+  max-width: 768px;
   height: 100%;
-  flex-basis: 50%;
-  background-color: grey;
+  margin: 15px auto;
+  border: 1px solid rgb(192, 188, 188);
+
+  .payment {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 22px;
+    width: 100%;
+    border-bottom: 1px solid rgb(179, 177, 177);
+  }
+
+  .method {
+    font-size: 18px;
+  }
 }
 .formContainer {
-  width: 100%;
+  width: 90%;
   height: 100%;
-  flex-basis: 50%;
-  padding: 15px;
-  border: 1px solid grey;
+  padding: 15px 0;
   justify-self: flex-start;
+  margin: 0 auto;
+
+  @include Desktop() {
+    width: 786px;
+  }
 
   .formGroup {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     margin: 10px 0;
 
     label {
-      width: 170px;
-      text-align: right;
-      margin-right: 15px;
+      width: 100%;
+      text-align: left;
+      margin-right: 0;
       font-size: 18px;
+      padding: 10px 0;
     }
     input {
-      width: 65%;
+      width: 100%;
       height: 35px;
       font-size: 18px;
       border-radius: 5px;
+      margin-bottom: 10px;
     }
   }
 
   .btn {
-    width: 120px;
+    width: 160px;
     height: auto;
     font-size: 16px;
     border-radius: 5px;
     color: #ffffff;
     background-color: rgb(146, 70, 246);
-    padding: 10px;
+    padding: 15px 10px;
+  }
+  .btn:hover {
+    background-color: rgb(128, 38, 245);
+    box-shadow: 0 0 8px rgb(204, 203, 203);
   }
 }

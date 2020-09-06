@@ -1,56 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import OrderForm from "../OrderForm/OrderForm";
 import styles from "./PreviousOrders.module.scss";
 import Search from "../Search/Search";
+import { OrderContext } from "../../Context/Context";
+import { TOTAL_ORDERS } from "../../Context/ActionTypes";
 
 function PreviousOrders() {
-  const [orders, setOrders] = useState();
+  const { state, dispatch } = useContext(OrderContext);
+  let { query, selected, orders } = state;
 
   const history = useHistory();
 
-  const getData = () => {
-    let totalOrders = JSON.parse(localStorage.getItem("Orders"));
-    setOrders(totalOrders);
-    console.log(totalOrders);
-  };
-
+  //Route to order Page
   const handleNewApiKey = () => {
     history.push("/create-order");
   };
 
-  const handleSearch = (query, value) => {
-    let time;
+  //Get data from local storage & if query filter accordingly
+  useEffect(() => {
+    let totalOrder = JSON.parse(localStorage.getItem("Orders"));
 
-    let filteredOrders = orders.filter((el) => {
-      return el[value].includes(query) ? el : false;
+    let filteredOrders = totalOrder.filter((el) => {
+      if (query === undefined || query === null) {
+        return el;
+      } else {
+        return el[selected].includes(query) ? el : false;
+      }
     });
 
-    if (time > 0) {
-      clearTimeout(time);
-    }
-
-    time = setTimeout(() => {
-      setOrders(filteredOrders);
-    }, 2000);
-  };
-
-  console.log(orders);
-
-  useEffect(() => {
-    getData();
-  }, []);
+    dispatch({
+      type: TOTAL_ORDERS,
+      payload: filteredOrders,
+    });
+  }, [query, dispatch, selected]);
 
   return (
     <div className={styles.container}>
-      <div>
-        <button onClick={() => handleNewApiKey()} className={styles.btn}>
-          Generate New ApiKey
-        </button>
+      <p className={styles.mainHead}>API Keys</p>
+
+      <div className={styles.topContainer}>
+        <Search></Search>
+        <div className={styles.btnContainer}>
+          <button onClick={() => handleNewApiKey()} className={styles.btn}>
+            Generate New ApiKey
+          </button>
+        </div>
       </div>
-      <div>
-        <p className={styles.mainHead}>API Keys</p>
-        <Search handleSearch={handleSearch}></Search>
+      <div className={styles.tableContainer}>
         {orders !== undefined && orders !== null ? (
           <table className={styles.table}>
             <thead className={styles.tableHead}>
@@ -62,7 +58,7 @@ function PreviousOrders() {
               </tr>
             </thead>
             <tbody className={styles.tableBody}>
-              {orders.map((api, i) => (
+              {state.orders.map((api, i) => (
                 <tr key={api.id}>
                   <td>{i + 1}</td>
                   <td>{api.id}</td>
